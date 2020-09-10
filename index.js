@@ -26,8 +26,14 @@ let mysqlCon = mysql.createConnection({
     console.log("Connected!");
 });
 
+/* Get all songs */
 app.get('/songs', (req, res) => {
-    mysqlCon.query('SELECT * FROM songs;', (error, results, fields) => {
+    const { title } = req.query;
+    title
+    ? mysqlCon.query(`SELECT * FROM songs WHERE title LIKE '${title}'`, (err, results) => {
+        err ? res.send(err) : res.send(results)
+    })
+    : mysqlCon.query('SELECT * FROM songs;', (error, results, fields) => {
         if (error) {
             res.send(error.message);
             throw error;
@@ -36,9 +42,9 @@ app.get('/songs', (req, res) => {
       });
 });
 
-app.get('/songs/:idORname', async (req, res) =>{
-    let sql = `SELECT * FROM songs WHERE songs.id = ${req.params.idORname};`
-    mysqlCon.query(sql, (error, results, fields) => {
+/* Get a song by id, title works too */
+app.get('/songs/:idORtitle', async (req, res) =>{
+    mysqlCon.query('SELECT * FROM songs WHERE id = ? OR title LIKE ?',[req.params.idORtitle, req.params.idORtitle], (error, results, fields) => {
         if (error) {
             res.send(error.message);
             throw error;
@@ -46,16 +52,6 @@ app.get('/songs/:idORname', async (req, res) =>{
         res.send(results);
       });
 });
-
-// app.get('/song/:id', async (req, res) =>{
-//     mysqlCon.query('SELECT * FROM songs WHERE song_id = ? AND song_name = ?',[req.params.id,'asdf'], (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.send(results);
-//       });
-// });
 
 // app.post('/song', async (req, res) =>{
 //     mysqlCon.query('INSERT INTO songs SET ?',req.body, (error, results, fields) => {
