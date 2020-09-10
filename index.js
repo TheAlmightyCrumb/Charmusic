@@ -26,6 +26,8 @@ let mysqlCon = mysql.createConnection({
     console.log("Connected!");
 });
 
+/* ----- */
+
 /* -- GET REQUESTS -- */ 
 
 /* Get all songs */
@@ -194,14 +196,44 @@ app.put('/playlists/:id', (req, res) =>{
     });
 });
 
-// app.delete('/song/:id', async (req, res) =>{
-//     mysqlCon.query('DELETE FROM songs WHERE song_id = ?',[req.params.id], (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.send(results);
-//       });
-// });
+/* -- DELETE REQUESTS -- */
+
+/* Delete a song using its unique identifier */
+app.delete('/songs/:id', async (req, res) =>{
+    mysqlCon.query(`DELETE FROM songs WHERE id = ${req.params.id}`, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+      });
+});
+
+/* Delete an album using its unique identifier */
+app.delete('/albums/:id', async (req, res) =>{
+    mysqlCon.query(`DELETE FROM albums WHERE id = ${req.params.id}`, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+      });
+});
+
+/* Delete an artist using its unique identifier */
+app.delete('/artists/:id', async (req, res) =>{
+    mysqlCon.query(`DELETE FROM artists WHERE id = ${req.params.id}`, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+      });
+});
+
+/* Delete a playlist using its unique identifier */
+app.delete('/playlists/:id', async (req, res) =>{
+    mysqlCon.query(`DELETE FROM playlists WHERE id = ${req.params.id}`, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+      });
+});
+
+/* ----- */
 
 app.listen(3001);
