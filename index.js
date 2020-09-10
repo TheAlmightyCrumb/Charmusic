@@ -126,7 +126,7 @@ app.post('/songs', (req, res) => {
         error
         ? res.send(error.message)
         : res.send(results)
-      });
+    });
 });
 
 /* Add an album to the database */
@@ -135,7 +135,7 @@ app.post('/albums', (req, res) => {
         error
         ? res.send(error.message)
         : res.send(results)
-      });
+    });
 });
 
 /* Add an artist to the database */
@@ -144,7 +144,7 @@ app.post('/artist', (req, res) => {
         error
         ? res.send(error.message)
         : res.send(results)
-      });
+    });
 });
 
 /* Add a playlist to the database */
@@ -153,30 +153,46 @@ app.post('/playlists', (req, res) => {
         error
         ? res.send(error.message)
         : res.send(results)
-      });
+    });
 });
 
 /* -- PUT REQUESTS -- */
 
-/* Edit a song by its unique id number */
+/* Edit a song by its unique identifier */
 app.put('/songs/:id', (req, res) =>{
-        mysqlCon.query(`UPDATE songs SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
-            error
-            ? res.send(error.message)
-            : res.send(results)
-          });
+    mysqlCon.query(`UPDATE songs SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
     });
+});
 
-// app.put('/songs/:id', async (req, res) =>{
-//     mysqlCon.query('UPDATE songs SET title = ?, artist_id = ?, length = ? WHERE song_id = ?',
-//     [req.body.song_name, req.body.artist_id, req.body.length, req.body.song_id], (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.send(results);
-//       });
-// });
+/* Edit an album by its unique identifier */
+app.put('/albums/:id', (req, res) =>{
+    mysqlCon.query(`UPDATE albums SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+    });
+});
+
+/* Edit an artist by its unique identifier */
+app.put('/artists/:id', (req, res) =>{
+    mysqlCon.query(`UPDATE artists SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+    });
+});
+
+/* Edit a playlist by its unique identifier */
+app.put('/playlists/:id', (req, res) =>{
+    mysqlCon.query(`UPDATE playlists SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+    });
+});
 
 // app.delete('/song/:id', async (req, res) =>{
 //     mysqlCon.query('DELETE FROM songs WHERE song_id = ?',[req.params.id], (error, results, fields) => {
