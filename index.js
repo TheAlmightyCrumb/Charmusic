@@ -120,12 +120,39 @@ app.get('/top/playlists', (req, res) => {
 
 /* ----- */
 
+/* Add a song to the database */
 app.post('/songs', (req, res) => {
-    let sql = 'INSERT INTO songs (title, artist_id, album_id, length, track_number, lyrics, released_at, uploaded_at, youtube, library_id) ?';
-    mysqlCon.query(sql ,req.body, (error, results) => {
+    mysqlCon.query('INSERT INTO songs SET ?', req.body, (error, results) => {
         error
         ? res.send(error.message)
-        : res.send(results)   
+        : res.send(results)
+      });
+});
+
+/* Add an album to the database */
+app.post('/albums', (req, res) => {
+    mysqlCon.query('INSERT INTO albums SET ?', req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+      });
+});
+
+/* Add an artist to the database */
+app.post('/artist', (req, res) => {
+    mysqlCon.query('INSERT INTO artists SET ?', req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
+      });
+});
+
+/* Add a playlist to the database */
+app.post('/playlists', (req, res) => {
+    mysqlCon.query('INSERT INTO playlists SET ?', req.body, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)
       });
 });
 
