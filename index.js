@@ -26,7 +26,7 @@ let mysqlCon = mysql.createConnection({
     console.log("Connected!");
 });
 
-/* ----- */
+/* -- GET REQUESTS -- */ 
 
 /* Get all songs */
 app.get('/songs', (req, res) => {
@@ -118,7 +118,7 @@ app.get('/top/playlists', (req, res) => {
     });
 });
 
-/* ----- */
+/* -- POST REQUESTS -- */
 
 /* Add a song to the database */
 app.post('/songs', (req, res) => {
@@ -156,8 +156,19 @@ app.post('/playlists', (req, res) => {
       });
 });
 
-// app.put('/song', async (req, res) =>{
-//     mysqlCon.query('UPDATE songs SET song_name = ?, artist_id = ?, length = ? WHERE song_id = ?',
+/* -- PUT REQUESTS -- */
+
+/* Edit a song by its unique id number */
+app.put('/songs/:id', (req, res) =>{
+        mysqlCon.query(`UPDATE songs SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+            error
+            ? res.send(error.message)
+            : res.send(results)
+          });
+    });
+
+// app.put('/songs/:id', async (req, res) =>{
+//     mysqlCon.query('UPDATE songs SET title = ?, artist_id = ?, length = ? WHERE song_id = ?',
 //     [req.body.song_name, req.body.artist_id, req.body.length, req.body.song_id], (error, results, fields) => {
 //         if (error) {
 //             res.send(error.message);
