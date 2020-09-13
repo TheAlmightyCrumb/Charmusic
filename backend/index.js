@@ -57,6 +57,15 @@ app.get('/songs/:idORtitle', (req, res) => {
       });
 });
 
+/* Get all albums */
+app.get('/albums', (req, res) => {
+    mysqlCon.query('SELECT * FROM albums;', [req.params.idORname, req.params.idORname], (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)      
+      });
+});
+
 /* Get an album by id or name */
 app.get('/albums/:idORname', (req, res) => {
     mysqlCon.query('SELECT * FROM albums WHERE id = ? OR name LIKE ?', [req.params.idORname, req.params.idORname], (error, results) => {
@@ -66,9 +75,27 @@ app.get('/albums/:idORname', (req, res) => {
       });
 });
 
+/* Get all artists */
+app.get('/artists', (req, res) => {
+    mysqlCon.query('SELECT * FROM artists;', [req.params.idORname, req.params.idORname], (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)      
+      });
+});
+
 /* Get an artist by id or name */
 app.get('/artists/:idORname', (req, res) => {
     mysqlCon.query('SELECT * FROM artists WHERE id = ? OR name LIKE ?', [req.params.idORname, req.params.idORname], (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)      
+      });
+});
+
+/* Get all playlists */
+app.get('/playlists', (req, res) => {
+    mysqlCon.query('SELECT * FROM playlists;', [req.params.idORname, req.params.idORname], (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
