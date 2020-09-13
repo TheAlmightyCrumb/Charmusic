@@ -1,2 +1,2 @@
-# *`ERD`*
+## *`ERD`*
 ![ERD](./ERD-charmusic.png)
