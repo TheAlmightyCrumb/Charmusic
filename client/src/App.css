@@ -7,31 +7,51 @@
 
 .App {
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 6fr;
   height: 100vh;
 }
 
 .header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   background-color: var(--beau-blue);
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.link {
+  margin-right: 20px;
+  color: var(--space-cadet);
+  text-decoration: none;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.link:hover {
+  margin-right: 20px;
+  color: var(--space-cadet);
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
 }
 
 #logo {
-  height: 100px;
-  width: 100px;
-  position: fixed;
-  right: 20px;
+  height: 90px;
+  width: 90px;
+  margin-left: 20px;
 }
 
 .container {
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 15% 85%;
 }
 
 .left {
-  background-color: var(--space-cadet);
+  background-color: var(--max-red);
 }
 
 .right {
-  background-color: var(--rufous-red);
+  background-color: var(--space-cadet);
 }
