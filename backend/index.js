@@ -59,7 +59,7 @@ app.get('/songs/:idORtitle', (req, res) => {
 
 /* Get all albums */
 app.get('/albums', (req, res) => {
-    mysqlCon.query('SELECT * FROM albums;', [req.params.idORname, req.params.idORname], (error, results) => {
+    mysqlCon.query('SELECT * FROM albums;', (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -77,7 +77,7 @@ app.get('/albums/:idORname', (req, res) => {
 
 /* Get all artists */
 app.get('/artists', (req, res) => {
-    mysqlCon.query('SELECT * FROM artists;', [req.params.idORname, req.params.idORname], (error, results) => {
+    mysqlCon.query('SELECT * FROM artists;', (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
