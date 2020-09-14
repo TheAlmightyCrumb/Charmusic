@@ -1,19 +1,26 @@
 import React from 'react';
 import './App.css';
-import logo from './c8ffe006-9009-4fc2-aa49-894884473503_200x200.png'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import Header from './components/Header';
+import Songs from './components/Songs';
+import NavBar from './components/NavBar';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <div className="header">
-        <img src={logo} id="logo" alt="logo"/>
-        <a className="link" href="https://github.com/TheAlmightyCrumb" target="_blank" rel="noopener noreferrer">@TheAlmightyCrumb on GitHub</a>
-      </div>
+    <BrowserRouter>
+      <Header />
       <div className="container">
-        <div className="left"></div>
-        <div className="right"></div>
+        <NavBar />
+        <div id="page">
+          <Switch>
+            <Route path="/songs" component={Songs}/>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
