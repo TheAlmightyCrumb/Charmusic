@@ -66,7 +66,9 @@ app.get('/songs/:id', (req, res) => {
             : res.send(results)      
         })
     } else {
-        mysqlCon.query('SELECT * FROM songs WHERE Song_id = ?', req.params.id, (error, results) => {
+        mysqlCon.query(`SELECT *, (SELECT Album_Name FROM albums WHERE songs.Album_id = albums.Album_id) AS Album_Name,
+        (SELECT Artist_Name FROM artists WHERE songs.Artist_id = artists.Artist_id) AS Artist_Name
+         FROM songs WHERE songs.Song_id = ?`, req.params.id, (error, results) => {
         if (error) {
             res.send(error.message);
             throw error;
@@ -106,7 +108,7 @@ app.get('/artists', (req, res) => {
 /* Get an artist by id */
 app.get('/artists/:id', (req, res) => {
     mysqlCon.query(
-        'SELECT * FROM artists JOIN songs ON songs.artist_id = artists.Artist_id JOIN albums ON albums.Album_id = songs.album_id WHERE artists.Artist_id = ?', req.params.id, (error, results) => {
+        `SELECT * FROM artists JOIN songs ON songs.artist_id = artists.Artist_id JOIN albums ON albums.Album_id = songs.album_id WHERE artists.Artist_id = ? ORDER BY albums.Album_id`, req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      

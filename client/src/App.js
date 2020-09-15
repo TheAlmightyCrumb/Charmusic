@@ -7,6 +7,7 @@ import Albums from './components/Albums';
 import Artists from './components/Artists';
 import NavBar from './components/NavBar';
 import ArtistPage from './components/ArtistPage';
+import SongPage from './components/SongPage';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/albums" component={Albums} exact />
             <Route path="/artists" component={Artists} exact />
             <Route path="/artists/:id" component={ArtistPage} />
+            <Route path="/songs/:id" component={SongPage} />
           </Switch>
         </div>
       </div>

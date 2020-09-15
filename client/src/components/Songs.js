@@ -11,7 +11,7 @@ export default function Songs() {
         setSongs(songsArr.map(song => {
             return (
             <div 
-            key={song.id}
+            key={song.Song_id}
             >   {song.Title}
             </div>
             )

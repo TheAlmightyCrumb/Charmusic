@@ -8,7 +8,7 @@ export default function Albums() {
     const showAlbums = async () => {
         const { data } = await axios.get('/albums');
         const albumsArr = data;
-        setAlbums(albumsArr.map(album => <li key={album.id}>{album.Album_Name}</li>));
+        setAlbums(albumsArr.map(album => <li key={album.Album_id}>{album.Album_Name}</li>));
     }
 
     useEffect(() => {
