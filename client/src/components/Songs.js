@@ -8,7 +8,14 @@ export default function Songs() {
     const showSongs = async () => {
         const { data } = await axios.get('/songs');
         const songsArr = data;
-        setSongs(songsArr.map(song => <li key={song.id}>{song.Title}</li>));
+        setSongs(songsArr.map(song => {
+            return (
+            <div 
+            key={song.id}
+            >   {song.Title}
+            </div>
+            )
+        }));
     }
 
     useEffect(() => {
@@ -16,8 +23,8 @@ export default function Songs() {
     }, []);
     
     return (
-        <ol>
+        <div>
             {songs}
-        </ol>
+        </div>
     )
 }

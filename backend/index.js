@@ -46,15 +46,34 @@ app.get('/songs', (req, res) => {
         });
 });
 
-/* Get a song by id, title works too */
-app.get('/songs/:idORtitle', (req, res) => {
-    mysqlCon.query('SELECT * FROM songs WHERE id = ? OR title LIKE ?', [req.params.idORtitle, req.params.idORtitle], (error, results) => {
+/* Get a song by id */
+app.get('/songs/:id', (req, res) => {
+    console.log(req.query);
+    if (Object.keys(req.query)[0] == 'playlist') {
+        mysqlCon.query(
+            `SELECT * FROM songs AS s JOIN libraries AS l ON s.id = l.Song_id WHERE l.Playlist_id = ${req.query.playlist} AND s.id != ${req.params.id}`, (error, results) => {
+            error
+            ? res.send(error.message)
+            : res.send(results)      
+        })
+    }
+    if (Object.keys(req.query).length > 0) {
+        let key = Object.keys(req.query)[0].concat('_id');
+        let value = Object.values(req.query)[0];
+        mysqlCon.query('SELECT * FROM songs WHERE id != ? AND ?? = ?', [req.params.id, key, value], (error, results) => {
+            error
+            ? res.send(error.message)
+            : res.send(results)      
+        })
+    } else {
+        mysqlCon.query('SELECT * FROM songs WHERE id = ?', req.params.id, (error, results) => {
         if (error) {
             res.send(error.message);
             throw error;
         };
         res.send(results);
-      });
+        });
+    }
 });
 
 /* Get all albums */
@@ -66,9 +85,9 @@ app.get('/albums', (req, res) => {
       });
 });
 
-/* Get an album by id or name */
-app.get('/albums/:idORname', (req, res) => {
-    mysqlCon.query('SELECT * FROM albums WHERE id = ? OR name LIKE ?', [req.params.idORname, req.params.idORname], (error, results) => {
+/* Get an album by id */
+app.get('/albums/:id', (req, res) => {
+    mysqlCon.query('SELECT * FROM albums WHERE id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -84,9 +103,9 @@ app.get('/artists', (req, res) => {
       });
 });
 
-/* Get an artist by id or name */
-app.get('/artists/:idORname', (req, res) => {
-    mysqlCon.query('SELECT * FROM artists WHERE id = ? OR name LIKE ?', [req.params.idORname, req.params.idORname], (error, results) => {
+/* Get an artist by id */
+app.get('/artists/:id', (req, res) => {
+    mysqlCon.query('SELECT * FROM artists WHERE id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -102,9 +121,9 @@ app.get('/playlists', (req, res) => {
       });
 });
 
-/* Get a playlist by id or name */
-app.get('/playlists/:idORname', (req, res) => {
-    mysqlCon.query('SELECT * FROM playlists WHERE id = ? OR name LIKE ?', [req.params.idORname, req.params.idORname], (error, results) => {
+/* Get a playlist by id */
+app.get('/playlists/:id', (req, res) => {
+    mysqlCon.query('SELECT * FROM playlists WHERE id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      

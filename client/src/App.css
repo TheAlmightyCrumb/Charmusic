@@ -48,6 +48,7 @@
   display: grid;
   grid-template-columns: 15% 85%;
   height: calc(100vh - 96px);
+  font-family: "Nunito", sans-serif;
 }
 
 #menu {
@@ -67,4 +68,6 @@
 
 #page {
   background-color: var(--space-cadet);
+  color: var(--beau-blue);
+  font-size: 1.2rem;
 }

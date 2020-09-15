@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function artists() {
+export default function Artists() {
 
     const [artists, setArtists] = useState([]);
     
