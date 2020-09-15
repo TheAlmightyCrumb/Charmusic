@@ -51,7 +51,7 @@ app.get('/songs/:id', (req, res) => {
     console.log(req.query);
     if (Object.keys(req.query)[0] == 'playlist') {
         mysqlCon.query(
-            `SELECT * FROM songs AS s JOIN libraries AS l ON s.id = l.Song_id WHERE l.Playlist_id = ${req.query.playlist} AND s.id != ${req.params.id}`, (error, results) => {
+            `SELECT * FROM songs AS s JOIN libraries AS l ON s.Song_id = l.Song_id WHERE l.Playlist_id = ${req.query.playlist} AND s.Song_id != ${req.params.id}`, (error, results) => {
             error
             ? res.send(error.message)
             : res.send(results)      
@@ -60,13 +60,13 @@ app.get('/songs/:id', (req, res) => {
     if (Object.keys(req.query).length > 0) {
         let key = Object.keys(req.query)[0].concat('_id');
         let value = Object.values(req.query)[0];
-        mysqlCon.query('SELECT * FROM songs WHERE id != ? AND ?? = ?', [req.params.id, key, value], (error, results) => {
+        mysqlCon.query('SELECT * FROM songs WHERE Song_id != ? AND ?? = ?', [req.params.id, key, value], (error, results) => {
             error
             ? res.send(error.message)
             : res.send(results)      
         })
     } else {
-        mysqlCon.query('SELECT * FROM songs WHERE id = ?', req.params.id, (error, results) => {
+        mysqlCon.query('SELECT * FROM songs WHERE Song_id = ?', req.params.id, (error, results) => {
         if (error) {
             res.send(error.message);
             throw error;
@@ -87,7 +87,7 @@ app.get('/albums', (req, res) => {
 
 /* Get an album by id */
 app.get('/albums/:id', (req, res) => {
-    mysqlCon.query('SELECT * FROM albums WHERE id = ?', req.params.id, (error, results) => {
+    mysqlCon.query('SELECT * FROM albums WHERE Album_id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -105,7 +105,8 @@ app.get('/artists', (req, res) => {
 
 /* Get an artist by id */
 app.get('/artists/:id', (req, res) => {
-    mysqlCon.query('SELECT * FROM artists WHERE id = ?', req.params.id, (error, results) => {
+    mysqlCon.query(
+        'SELECT * FROM artists JOIN songs ON songs.artist_id = artists.Artist_id JOIN albums ON albums.Album_id = songs.album_id WHERE artists.Artist_id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -123,7 +124,7 @@ app.get('/playlists', (req, res) => {
 
 /* Get a playlist by id */
 app.get('/playlists/:id', (req, res) => {
-    mysqlCon.query('SELECT * FROM playlists WHERE id = ?', req.params.id, (error, results) => {
+    mysqlCon.query('SELECT * FROM playlists WHERE Playlist_id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -208,7 +209,7 @@ app.post('/playlists', (req, res) => {
 
 /* Edit a song by its unique identifier */
 app.put('/songs/:id', (req, res) =>{
-    mysqlCon.query(`UPDATE songs SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+    mysqlCon.query(`UPDATE songs SET ? WHERE Song_id = ${req.params.id}`, req.body, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -217,7 +218,7 @@ app.put('/songs/:id', (req, res) =>{
 
 /* Edit an album by its unique identifier */
 app.put('/albums/:id', (req, res) =>{
-    mysqlCon.query(`UPDATE albums SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+    mysqlCon.query(`UPDATE albums SET ? WHERE Album_id = ${req.params.id}`, req.body, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -226,7 +227,7 @@ app.put('/albums/:id', (req, res) =>{
 
 /* Edit an artist by its unique identifier */
 app.put('/artists/:id', (req, res) =>{
-    mysqlCon.query(`UPDATE artists SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+    mysqlCon.query(`UPDATE artists SET ? WHERE Artist_id = ${req.params.id}`, req.body, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -235,7 +236,7 @@ app.put('/artists/:id', (req, res) =>{
 
 /* Edit a playlist by its unique identifier */
 app.put('/playlists/:id', (req, res) =>{
-    mysqlCon.query(`UPDATE playlists SET ? WHERE id = ${req.params.id}`, req.body, (error, results) => {
+    mysqlCon.query(`UPDATE playlists SET ? WHERE Playlist_id = ${req.params.id}`, req.body, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -246,7 +247,7 @@ app.put('/playlists/:id', (req, res) =>{
 
 /* Delete a song using its unique identifier */
 app.delete('/songs/:id', async (req, res) =>{
-    mysqlCon.query(`DELETE FROM songs WHERE id = ${req.params.id}`, (error, results) => {
+    mysqlCon.query(`DELETE FROM songs WHERE Song_id = ${req.params.id}`, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -255,7 +256,7 @@ app.delete('/songs/:id', async (req, res) =>{
 
 /* Delete an album using its unique identifier */
 app.delete('/albums/:id', async (req, res) =>{
-    mysqlCon.query(`DELETE FROM albums WHERE id = ${req.params.id}`, (error, results) => {
+    mysqlCon.query(`DELETE FROM albums WHERE Album_id = ${req.params.id}`, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -264,7 +265,7 @@ app.delete('/albums/:id', async (req, res) =>{
 
 /* Delete an artist using its unique identifier */
 app.delete('/artists/:id', async (req, res) =>{
-    mysqlCon.query(`DELETE FROM artists WHERE id = ${req.params.id}`, (error, results) => {
+    mysqlCon.query(`DELETE FROM artists WHERE Artist_id = ${req.params.id}`, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)
@@ -273,7 +274,7 @@ app.delete('/artists/:id', async (req, res) =>{
 
 /* Delete a playlist using its unique identifier */
 app.delete('/playlists/:id', async (req, res) =>{
-    mysqlCon.query(`DELETE FROM playlists WHERE id = ${req.params.id}`, (error, results) => {
+    mysqlCon.query(`DELETE FROM playlists WHERE Playlist_id = ${req.params.id}`, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)

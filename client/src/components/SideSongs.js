@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SideSongs() {
+export default function SideSongs(props) {
     return (
         <div>
             

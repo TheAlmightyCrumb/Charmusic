@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import { NavLink } from 'react-router-dom';
 import Header from './components/Header';
 import Songs from './components/Songs';
 import Albums from './components/Albums';

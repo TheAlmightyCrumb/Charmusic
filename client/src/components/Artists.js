@@ -8,7 +8,7 @@ export default function Artists() {
     const showArtists = async () => {
         const { data } = await axios.get('/artists');
         const artistsArr = data;
-        setArtists(artistsArr.map(artist => <li key={artist.id}>{artist.Name}</li>));
+        setArtists(artistsArr.map(artist => <li key={artist.id}>{artist.Artist_Name}</li>));
     }
 
     useEffect(() => {
