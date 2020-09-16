@@ -11,22 +11,28 @@ export default function ArtistPage({match}) {
 
     const showArtistInfo = async () => {
         const { data } = await axios.get(`/artists/${match.params.id}`);
-        console.log(data);
-        const albumArr = data.map(item => item.Album_Name);
-        const distinctAlbumArr = [albumArr[0]];
-        for (let i = 1; i < albumArr.length - 1; i++) {
-            if (albumArr[i-1] !== albumArr[i]) {
-                distinctAlbumArr.push(albumArr[i]);
-            }
-        }
         setArtistName(data[0].Artist_Name);
         setArtistImage(data[0].Cover_img);
-        setArtistAlbums(distinctAlbumArr.map((album, i) => <div key={i}>{album}</div>));
-        setArtistSongs(data.map((info, i) => <div key={i}><Link to={`/songs/${info.Song_id}?artist=${info.Artist_id}`}>{info.Title}</Link></div>));
+    }
+
+    const showAlbums = async () => {
+        const { data } = await axios.get('/albums');
+        const albumsArr = data.filter(album => album.Artist_id == match.params.id)
+            .map(item => <div key={item.Album_id}><Link to={`/albums/${item.Album_id}`}>{item.Album_Name}</Link></div>);
+        setArtistAlbums(albumsArr);
+    }
+
+    const showSongs = async () => {
+        const { data } = await axios.get('/songs');
+        const songsArr = data.filter(song => song.Artist_id == match.params.id)
+          .map(item => <div key={item.Song_id}><Link to={`/songs/${item.Song_id}?artist=${item.Artist_id}`}>{item.Title}</Link></div>);
+        setArtistSongs(songsArr);
     }
 
     useEffect(() => {
-        showArtistInfo()
+        showArtistInfo();
+        showAlbums();
+        showSongs();
     }, []);
 
     return (

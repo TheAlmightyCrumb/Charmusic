@@ -108,7 +108,7 @@ app.get('/artists', (req, res) => {
 /* Get an artist by id */
 app.get('/artists/:id', (req, res) => {
     mysqlCon.query(
-        `SELECT * FROM artists JOIN songs ON songs.artist_id = artists.Artist_id JOIN albums ON albums.Album_id = songs.album_id WHERE artists.Artist_id = ? ORDER BY albums.Album_id`, req.params.id, (error, results) => {
+        `SELECT * FROM artists WHERE Artist_id = ?`, req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
