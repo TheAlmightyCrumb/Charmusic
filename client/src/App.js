@@ -10,6 +10,7 @@ import ArtistPage from './components/ArtistPage';
 import SongPage from './components/SongPage';
 import AlbumPage from './components/AlbumPage';
 import Home from './components/Home';
+import Error from './components/Error';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/artists/:id" component={ArtistPage} />
             <Route path="/songs/:id" component={SongPage} />
             <Route path="/albums/:id" component={AlbumPage} />
+            <Route component={Error} />
           </Switch>
         </div>
       </div>
