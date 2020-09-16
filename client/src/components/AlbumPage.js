@@ -13,22 +13,28 @@ export default function AlbumPage() {
     const showAlbumInfo = async () => {
         const { data } = await axios.get(`/albums/${id}`);
         setAlbumInfo(...data);
-        const artistId = data[0].Artist_id;
-        axios.get(`/artists/${artistId}`).then( res => {
-            console.log("res: ", res);
-            res = res.data[0];
-            setArtistName(res.Artist_Name);
-        })
+        const artist = await axios.get(`/artists/${data[0].Artist_id}`);
+        setArtistName(<div><Link to={`/artists/${artist.data[0].Artist_id}`}>{artist.data[0].Artist_Name}</Link></div>);
+    }
+
+    const showSongs = async () => {
+        const { data } = await axios.get('/songs');
+        const songsArr = data.filter(song => song.Album_id == id)
+          .map(item => <div key={item.Song_id}><Link to={`/songs/${item.Song_id}?album=${item.Album_id}`}>{item.Title}</Link></div>);
+        setSongList(songsArr);
     }
 
     useEffect(() => {
-        showAlbumInfo() 
+        showAlbumInfo();
+        showSongs();
     }, []);
 
     return (
         <div>
-            {albumInfo.Album_Name}<br />
-            {artistName}
+            Name: {albumInfo.Album_Name}<br />
+            Image: {albumInfo.Cover_img}<br />
+            Artist: {artistName} <br />
+            Songs: {songList}
         </div>
     )
 }

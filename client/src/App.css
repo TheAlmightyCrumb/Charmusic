@@ -5,13 +5,6 @@
   --rufous-red: #AE040C;
 }
 
-/* .App {
-  display: grid;
-  grid-template-rows: 1fr 6fr;
-  height: 100vh;
-  font-family: "Nunito", sans-serif;
-} */
-
 .header {
   display: flex;
   flex-flow: row wrap;
@@ -70,4 +63,9 @@
   background-color: var(--space-cadet);
   color: var(--beau-blue);
   font-size: 1.2rem;
+}
+
+.carousel {
+  width: 800px;
+  height: 450px;
 }

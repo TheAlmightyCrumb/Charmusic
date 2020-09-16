@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import ArtistPage from './components/ArtistPage';
 import SongPage from './components/SongPage';
 import AlbumPage from './components/AlbumPage';
+import Home from './components/Home';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <NavBar />
         <div id="page">
           <Switch>
+            <Route path="/" component={Home} exact />
             <Route path="/songs" component={Songs} exact />
             <Route path="/albums" component={Albums} exact />
             <Route path="/artists" component={Artists} exact />
