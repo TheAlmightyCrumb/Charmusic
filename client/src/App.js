@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/Header';
 import Songs from './components/Songs';
 import Albums from './components/Albums';
@@ -16,8 +16,6 @@ import Error from './components/Error';
 
 
 function App() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Router>

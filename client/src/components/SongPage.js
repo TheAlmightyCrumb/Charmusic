@@ -17,12 +17,19 @@ export default function SongPage({ match, location }) {
         showSongInfo()
     }, [location]);
 
+    const fullScreen = () => {
+        const elem = document.querySelector('.media');
+        // elem.webkitRequestFullScreen();
+        const dbclick = setInterval(() => { elem.click(); console.log('boo') }, 200);
+        setTimeout(() => clearInterval(dbclick), 500);
+    }
+
     return (
         <div>
             Title: {songInfo.Title} <br />
             Artist: <Link to={`/artists/${songInfo.Artist_id}`}> {songInfo.Artist_Name} </Link><br />
             Album: <Link to={`/albums/${songInfo.Album_id}`}> {songInfo.Album_Name} </Link><br />
-            {/* <iframe width="560" height="315" src={songInfo.Youtube} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe><br /> */}
+            <iframe onLoad={() => fullScreen()} className='media' src={songInfo.Youtube} frameBorder="0" allow="autoplay"></iframe><br />
             Length: {songInfo.Length}<br />
             Lyrics: {songInfo.Lyrics}
             <SideSongs query={location.search} idParam={match.params.id} />
