@@ -56,8 +56,7 @@ app.get('/songs/:id', (req, res) => {
             ? res.send(error.message)
             : res.send(results)      
         })
-    }
-    if (Object.keys(req.query).length > 0) {
+    } else if (Object.keys(req.query).length > 0) {
         let key = Object.keys(req.query)[0].concat('_id');
         let value = Object.values(req.query)[0];
         mysqlCon.query('SELECT * FROM songs WHERE Song_id != ? AND ?? = ?', [req.params.id, key, value], (error, results) => {
@@ -117,7 +116,7 @@ app.get('/artists/:id', (req, res) => {
 
 /* Get all playlists */
 app.get('/playlists', (req, res) => {
-    mysqlCon.query('SELECT * FROM playlists;', [req.params.idORname, req.params.idORname], (error, results) => {
+    mysqlCon.query('SELECT * FROM playlists;', (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      
@@ -127,6 +126,15 @@ app.get('/playlists', (req, res) => {
 /* Get a playlist by id */
 app.get('/playlists/:id', (req, res) => {
     mysqlCon.query('SELECT * FROM playlists WHERE Playlist_id = ?', req.params.id, (error, results) => {
+        error
+        ? res.send(error.message)
+        : res.send(results)      
+      });
+});
+
+/* Get a playlist's songs by its id */
+app.get('/playlist/songs/:id', (req, res) => {
+    mysqlCon.query('SELECT Song_id FROM playlists p JOIN libraries l ON p.Playlist_id = l.Playlist_id WHERE p.Playlist_id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
         : res.send(results)      

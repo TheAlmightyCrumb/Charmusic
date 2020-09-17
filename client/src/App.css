@@ -63,9 +63,23 @@
   background-color: var(--space-cadet);
   color: var(--beau-blue);
   font-size: 1.2rem;
+  overflow: auto;
 }
 
 .carousel {
-  width: 800px;
+  width: 1000px;
   height: 450px;
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+.noImage {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: gold;
 }
