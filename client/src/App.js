@@ -13,15 +13,17 @@ import AlbumPage from './components/AlbumPage';
 import PlaylistPage from './components/PlaylistPage';
 import Home from './components/Home';
 import Error from './components/Error';
+import FadeMenu from './components/Menu';
 
 
 function App() {
 
   return (
     <Router>
-      <Header />
+      {/* <Header /> */}
+      <FadeMenu />
       <div className="container">
-        <NavBar />
+        {/* <FadeMenu /> */}
         <div id="page">
           <Switch>
             <Route path="/" component={Home} exact />

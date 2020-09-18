@@ -9,7 +9,15 @@ export default function Albums() {
     const showAlbums = async () => {
         const { data } = await axios.get('/albums');
         const albumsArr = data;
-        setAlbums(albumsArr.map(album => <li key={album.Album_id}><Link to={`/albums/${album.Album_id}`}>{album.Album_Name}</Link></li>));
+        setAlbums(albumsArr.map(album => {
+            return (
+                <div key={album.Album_id}>
+                    <Link to={`/albums/${album.Album_id}`}>
+                    <img src={album.Cover_img} className='albumImage' />
+                    <div className='albumName'>{album.Album_Name}</div>
+                </Link></div>
+            );
+        }));
     }
 
     useEffect(() => {
@@ -17,9 +25,9 @@ export default function Albums() {
     }, []);
     
     return (
-        <ol>
+        <div className='albumContainer'>
             {albums}
-        </ol>
+        </div>
     )
 }
 

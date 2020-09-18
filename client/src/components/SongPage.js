@@ -20,8 +20,8 @@ export default function SongPage({ match, location }) {
     const fullScreen = () => {
         const elem = document.querySelector('.media');
         // elem.webkitRequestFullScreen();
-        const dbclick = setInterval(() => { elem.click(); console.log('boo') }, 200);
-        setTimeout(() => clearInterval(dbclick), 500);
+        // const dbclick = setInterval(() => { elem.click(); console.log('boo') }, 200);
+        // setTimeout(() => clearInterval(dbclick), 7000);
     }
 
     return (

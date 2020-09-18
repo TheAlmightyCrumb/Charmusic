@@ -32,7 +32,7 @@ export default function AlbumPage() {
     return (
         <div>
             Name: {albumInfo.Album_Name}<br />
-            Image: {albumInfo.Cover_img}<br />
+            Image: <img src={albumInfo.Cover_img} /><br />
             Artist: {artistName} <br />
             Songs: {songList}
         </div>

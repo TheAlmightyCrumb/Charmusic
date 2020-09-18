@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import logo from '../c8ffe006-9009-4fc2-aa49-894884473503_200x200.png';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
 
@@ -20,8 +19,16 @@ export default function Home() {
 
     const showTopAlbums = async () => {
         const { data } = await axios.get('/top/albums');
-        const albumsArr = data.map(album => <div><Link to={`/albums/${album.Album_id}`}><img className='image' src={album.Cover_img}/><div>{album.Album_Name}</div></Link></div>
-        );
+        const albumsArr = data.map(album => {
+            return (
+                <Link to={`/albums/${album.Album_id}`} className='imageContainer'>
+                <img className='image' src={album.Cover_img}/>
+                {/* <div className='overlay'> */}
+                    <div className ='imageText'>{album.Album_Name}</div>
+                {/* </div> */}
+                </Link>
+            );
+        });
         setTopAlbums(albumsArr);
     }
 
@@ -48,29 +55,38 @@ export default function Home() {
 
     return (
         <div className='carousel'>
+            <h3>Featured Songs</h3>
             <Carousel
-             itemsToShow={5}
-             itemsToScroll={1}
+            className='carousel-item'
+            itemsToShow={5}
+            itemsToScroll={1}
             >
                 {topSongs}
             </Carousel>
             <br />
+            <h3>Featured Albums</h3>
             <Carousel
-             itemsToShow={5}
-             itemsToScroll={1}
+            className='carousel-item'
+            itemsToShow={5}
+            itemsToScroll={1}
             >
                 {topAlbums}
             </Carousel>
             <br />
+            <h3>Featured Artists</h3>
             <Carousel
-             itemsToShow={5}
-             itemsToScroll={1}
+            className='carousel-item'
+            itemsToShow={5}
+            itemsToScroll={1}
             >
                 {topArtists}
             </Carousel>
+            <br />
+            <h3>Featured Playlists</h3>
             <Carousel
-             itemsToShow={5}
-             itemsToScroll={1}
+            className='carousel-item'
+            itemsToShow={5}
+            itemsToScroll={1}
             >
                 {topPlaylists}
             </Carousel>
