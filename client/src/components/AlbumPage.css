@@ -1,0 +1,27 @@
+.albumContainer {
+    width: 900px;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 25px;
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  .albumImage {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 5px;
+  }
+
+  .albumName {
+      margin-bottom: 25px;
+      width: 200px;
+      text-align: center;
+      background-color: black;
+  }
+
+  .albumLink {
+      text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      color: var(--max-red);
+  }

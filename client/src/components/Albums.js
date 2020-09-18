@@ -12,7 +12,7 @@ export default function Albums() {
         setAlbums(albumsArr.map(album => {
             return (
                 <div key={album.Album_id}>
-                    <Link to={`/albums/${album.Album_id}`}>
+                    <Link to={`/albums/${album.Album_id}`} className='albumLink'>
                     <img src={album.Cover_img} className='albumImage' />
                     <div className='albumName'>{album.Album_Name}</div>
                 </Link></div>
