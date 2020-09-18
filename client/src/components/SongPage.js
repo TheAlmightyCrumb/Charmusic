@@ -21,7 +21,7 @@ export default function SongPage({ match, location }) {
         const elem = document.querySelector('.media');
         // elem.webkitRequestFullScreen();
         // const dbclick = setInterval(() => { elem.click(); console.log('boo') }, 200);
-        // setTimeout(() => clearInterval(dbclick), 7000);
+        // setTimeout(() => clearInterval(dbclick), 1000);
     }
 
     return (

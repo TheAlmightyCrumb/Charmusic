@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import './Albums.css';
 
 export default function Albums() {
 
@@ -13,7 +14,9 @@ export default function Albums() {
             return (
                 <div key={album.Album_id}>
                     <Link to={`/albums/${album.Album_id}`} className='albumLink'>
-                    <img src={album.Cover_img} className='albumImage' />
+                    <div className='albumImageContainer'>
+                        <img src={album.Cover_img} className='albumImage' />
+                    </div>
                     <div className='albumName'>{album.Album_Name}</div>
                 </Link></div>
             );

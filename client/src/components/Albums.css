@@ -7,10 +7,17 @@
     flex-flow: row wrap;
   }
   
+  .albumImageContainer {
+    height: 200px;
+    width: 200px;
+    border-radius: 7%;
+    margin-bottom: 5px;
+  }
+
   .albumImage {
     height: 200px;
     width: 200px;
-    margin-bottom: 5px;
+    object-fit: cover;
   }
 
   .albumName {
@@ -18,6 +25,7 @@
       width: 200px;
       text-align: center;
       background-color: black;
+      border-radius: 7%;
   }
 
   .albumLink {
