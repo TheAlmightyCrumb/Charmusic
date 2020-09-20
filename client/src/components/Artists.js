@@ -13,12 +13,13 @@ export default function Artists() {
         setArtists(artistsArr.map(artist => {
             return (
                 <div key={artist.Artist_id}>
-                <Link to={`/artists/${artist.Artist_id}`} className='artistLink'>
-                <div className='artistImageContainer'>
-                    <img src={artist.Cover_img} className='artistImage' />
+                    <Link to={`/artists/${artist.Artist_id}`} className='artistLink'>
+                        <div className='artistImageContainer'>
+                            <img src={artist.Cover_img} alt={artist.Artist_Name} className='artistImage' />
+                        </div>
+                        <div className='artistName'>{artist.Artist_Name}</div>
+                    </Link>
                 </div>
-                <div className='artistName'>{artist.Artist_Name}</div>
-                </Link></div>
             );
         }));
     }

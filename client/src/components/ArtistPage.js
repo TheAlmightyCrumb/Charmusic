@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LibraryMusicSharpIcon from '@material-ui/icons/LibraryMusicSharp';
+import './ArtistPage.css';
 
 export default function ArtistPage({match}) {
 
@@ -18,14 +20,35 @@ export default function ArtistPage({match}) {
     const showAlbums = async () => {
         const { data } = await axios.get('/albums');
         const albumsArr = data.filter(album => album.Artist_id == match.params.id)
-            .map(item => <div key={item.Album_id}><Link to={`/albums/${item.Album_id}`}>{item.Album_Name}</Link></div>);
+            .map(item => {
+                return (
+                    <div key={item.Album_id}>
+                        <Link to={`/albums/${item.Album_id}`} className='link'>
+                            <div className='albumImagePageContainer'>
+                                <img src={item.Cover_img} alt={item.Album_Name} className='albumPageImage' />
+                            </div>
+                            <div className='albumPageName'>{item.Album_Name}</div>
+                        </Link>
+                    </div>
+                )
+            });
         setArtistAlbums(albumsArr);
     }
 
     const showSongs = async () => {
         const { data } = await axios.get('/songs');
         const songsArr = data.filter(song => song.Artist_id == match.params.id)
-          .map(item => <div key={item.Song_id}><Link to={`/songs/${item.Song_id}?artist=${item.Artist_id}`}>{item.Title}</Link></div>);
+            .map(item => {
+                return (
+                    <div key={item.Song_id}>
+                        <Link to={`/songs/${item.Song_id}?artist=${item.Artist_id}`} className='link'>
+                            <div className='songTitleContainer'>
+                                <LibraryMusicSharpIcon /><span>{item.Title}</span>
+                            </div>
+                        </Link>
+                    </div>  
+                )
+          });
         setArtistSongs(songsArr);
     }
 
@@ -37,10 +60,21 @@ export default function ArtistPage({match}) {
 
     return (
         <div>
-            Name: {artistName} <br />
-            Image: {artistImage} <br />
-            Albums: {artistAlbums}
-            Songs: {artistSongs}
+            <h1 id='artistName'> {artistName} </h1>
+            <div id='wrapper'>
+                <div id='artistImageContainer'>
+                    <img src={artistImage} alt={artistName} id='artistPageImage' />
+                </div>
+                <section id='albumSection'>
+                    <h3 id='artistAlbums'>Albums</h3>
+                    <div id='albumsContainer'>
+                        {artistAlbums}
+                    </div>
+                </section>
+                <div id='songsContainer'>
+                    {artistSongs}
+                </div>
+            </div>
         </div>
     )
 }

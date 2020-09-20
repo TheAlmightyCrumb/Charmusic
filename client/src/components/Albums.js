@@ -14,11 +14,12 @@ export default function Albums() {
             return (
                 <div key={album.Album_id}>
                     <Link to={`/albums/${album.Album_id}`} className='albumLink'>
-                    <div className='albumImageContainer'>
-                        <img src={album.Cover_img} className='albumImage' />
-                    </div>
-                    <div className='albumName'>{album.Album_Name}</div>
-                </Link></div>
+                        <div className='albumImageContainer'>
+                            <img src={album.Cover_img} alt={album.Album_Name} className='albumImage' />
+                        </div>
+                        <div className='albumName'>{album.Album_Name}</div>
+                    </Link>
+                </div>
             );
         }));
     }

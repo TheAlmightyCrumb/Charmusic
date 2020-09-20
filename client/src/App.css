@@ -19,7 +19,7 @@ body {
   font-family: "Nunito Sans", sans-serif;
 }
 
-.link {
+/* .link {
   margin-right: 20px;
   color: var(--space-cadet);
   text-decoration: none;
@@ -33,7 +33,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   font-style: italic;
-}
+} */
 
 #logo {
   height: 90px;
@@ -55,7 +55,6 @@ body {
   align-items: flex-start;
   text-transform: uppercase;
   font-size: 1.5em;
-  
 }
 
 .menuOption {
