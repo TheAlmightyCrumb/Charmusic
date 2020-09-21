@@ -23,9 +23,7 @@ export default function Home() {
             return (
                 <Link to={`/albums/${album.Album_id}`} className='imageContainer'>
                 <img className='image' src={album.Cover_img}/>
-                {/* <div className='overlay'> */}
                     <div className ='imageText'>{album.Album_Name}</div>
-                {/* </div> */}
                 </Link>
             );
         });

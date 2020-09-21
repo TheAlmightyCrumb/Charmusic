@@ -1,4 +1,4 @@
-#albumName {
+#playlistName {
     text-align: center;
     font-family: 'Nunito Sans', sans-serif;
     border-top: 1px solid var(--rufous-red);
@@ -8,21 +8,21 @@
     padding: 5px;
 }
 
-#albumWrapper {
+#playlistWrapper {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-#albumImageContainer {
+#playlistImageContainer {
     height: 350px;
     width: 300px;
     border-radius: 50%;
     margin-bottom: 5px;
-    margin-left: 2em;
+    margin-left: 10em;
 }
 
-#albumPageImage {
+#playlistPageImage {
     height: 300px;
     width: 300px;
     border-radius: 50%;
@@ -30,56 +30,8 @@
     object-fit: cover;
 }
 
-#artistSection {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    width:100%;
-    margin-left: 3em;
-    overflow: auto;
-}
 
-#artist-of-album {
-    font-family: 'Nunito Sans', sans-serif;
-    color: var(--rufous-red);
-    border-bottom: 1px solid var(--rufous-red);
-    width: 300px;
-    margin-right: 4em;
-}
-
-#artist-container {
-    width: 400px;
-    justify-content: space-between;
-    margin: auto;
-    margin-top: 25px;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.artist-image-container {
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    margin-bottom: 5px;
-}
-
-.artist-image {
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.artist-name {
-    margin-bottom: 25px;
-    font-size: 15px;
-    width: 120px;
-    text-align: center;
-    background-color: black;
-    border-radius: 7%;
-}
-
-#album-song-section {
+#playlist-song-section {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -87,7 +39,7 @@
     overflow: auto;
 }
 
-#songs-of-album {
+#songs-of-playlist {
     font-family: 'Nunito Sans', sans-serif;
     color: var(--rufous-red);
     border-bottom: 1px solid var(--rufous-red);
@@ -96,7 +48,7 @@
 }
 
 
-#album-song-container {
+#playlist-song-container {
     width: 80%;
     max-width: 350px;
     overflow: auto;
@@ -123,7 +75,7 @@
     font-size: 0.8em;
 }
 
-.albumPageLink {
+.playlistPageLink {
     text-decoration: none;
     font-family: 'Nunito Sans', sans-serif;
     color: var(--max-red);
