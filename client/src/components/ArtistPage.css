@@ -21,6 +21,7 @@
     width: 300px;
     border-radius: 50%;
     margin-bottom: 5px;
+    margin-left: 2em;
 }
 
 #artistPageImage {
@@ -33,11 +34,13 @@
 
 #albumSection {
     display: flex;
-    /* flex-flow: column wrap; */
-    flex-direction: column;
+    flex-flow: column wrap;
+    /* flex-direction: column; */
     /* justify-content: space-evenly; */
     align-items: center;
     width:100%;
+    margin-left: 3em;
+    overflow: auto;
 }
 
 #artistAlbums {
@@ -45,10 +48,11 @@
     color: var(--rufous-red);
     border-bottom: 1px solid var(--rufous-red);
     width: 300px;
+    margin-right: 4em;
 }
 
 #albumsContainer {
-    width: 550px;
+    width: 400px;
     justify-content: space-between;
     margin: auto;
     margin-top: 25px;
@@ -79,17 +83,54 @@
     border-radius: 7%;
 }
 
+#songSection {
+    display: flex;
+    flex-flow: column wrap;
+    /* flex-direction: column; */
+    /* justify-content: space-evenly; */
+    align-items: center;
+    width: 100%;
+    /* margin-right: 1em; */
+    overflow: auto;
+}
+
+#artistSongs {
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--rufous-red);
+    border-bottom: 1px solid var(--rufous-red);
+    width: 200px;
+    margin-right: 2em;
+}
+
 
 #songsContainer {
-    width: 100px;
+    width: 80%;
+    max-width: 350px;
+    overflow: auto;
 }
 
 .songTitleContainer {
-    background-color: lightgray;
+    background-color: black;
+    border: 1px solid var(--max-red);
+    border-radius: 2%;
+    box-shadow: 2px 5px 5px 2px black;
+    padding: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
     /* max-width: 400px; */
 }
 
-.link {
+.artistSongTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 0.8em;
+}
+
+.artistPageLink {
     text-decoration: none;
     font-family: 'Nunito Sans', sans-serif;
     color: var(--max-red);

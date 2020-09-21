@@ -30,11 +30,31 @@ export default function AlbumPage() {
     }, []);
 
     return (
+        // <div>
+        //     Name: {albumInfo.Album_Name}<br />
+        //     Image: <img src={albumInfo.Cover_img} /><br />
+        //     Artist: {artistName} <br />
+        //     Songs: {songList}
+        // </div>
         <div>
-            Name: {albumInfo.Album_Name}<br />
-            Image: <img src={albumInfo.Cover_img} /><br />
-            Artist: {artistName} <br />
-            Songs: {songList}
+        <h1 id='albumName'> {albumInfo.Album_Name} </h1>
+        <div id='albumWrapper'>
+            <div id='albumImageContainer'>
+                <img src={albumInfo.Cover_img} alt={albumInfo.Album_Name} id='albumPageImage' />
+            </div>
+            <section id='artistSection'>
+                <h3 id='artist-of-album'>Albums</h3>
+                <div id='artist-container'>
+                    {artistName}
+                </div>
+            </section>
+            <section id='songSection'>
+                <h3 id='artistSongs'>Songs</h3>
+                <div id='songsContainer'>
+                   {artistSongs}
+                </div>
+            </section>
         </div>
+    </div>
     )
 }

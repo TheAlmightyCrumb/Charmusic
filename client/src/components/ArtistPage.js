@@ -23,7 +23,7 @@ export default function ArtistPage({match}) {
             .map(item => {
                 return (
                     <div key={item.Album_id}>
-                        <Link to={`/albums/${item.Album_id}`} className='link'>
+                        <Link to={`/albums/${item.Album_id}`} className='artistPageLink'>
                             <div className='albumImagePageContainer'>
                                 <img src={item.Cover_img} alt={item.Album_Name} className='albumPageImage' />
                             </div>
@@ -41,9 +41,10 @@ export default function ArtistPage({match}) {
             .map(item => {
                 return (
                     <div key={item.Song_id}>
-                        <Link to={`/songs/${item.Song_id}?artist=${item.Artist_id}`} className='link'>
+                        <Link to={`/songs/${item.Song_id}?artist=${item.Artist_id}`} className='artistPageLink'>
                             <div className='songTitleContainer'>
-                                <LibraryMusicSharpIcon /><span>{item.Title}</span>
+                                <span className='artistSongTitle'><LibraryMusicSharpIcon /><span style={{marginLeft: "5px"}}>{item.Title}</span></span>
+                                <span style={{fontSize: "0.8em"}}>{item.Length.substring(3)}</span>
                             </div>
                         </Link>
                     </div>  
@@ -71,9 +72,12 @@ export default function ArtistPage({match}) {
                         {artistAlbums}
                     </div>
                 </section>
-                <div id='songsContainer'>
-                    {artistSongs}
-                </div>
+                <section id='songSection'>
+                    <h3 id='artistSongs'>Songs</h3>
+                    <div id='songsContainer'>
+                       {artistSongs}
+                    </div>
+                </section>
             </div>
         </div>
     )
