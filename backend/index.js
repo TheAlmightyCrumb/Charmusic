@@ -133,7 +133,7 @@ app.get('/playlists/:id', (req, res) => {
 });
 
 /* Get a playlist's songs by its id */
-app.get('/playlist/songs/:id', (req, res) => {
+app.get('/playlists/songs/:id', (req, res) => {
     mysqlCon.query('SELECT Song_id FROM playlists p JOIN libraries l ON p.Playlist_id = l.Playlist_id WHERE p.Playlist_id = ?', req.params.id, (error, results) => {
         error
         ? res.send(error.message)
@@ -198,7 +198,7 @@ app.post('/albums', (req, res) => {
 });
 
 /* Add an artist to the database */
-app.post('/artist', (req, res) => {
+app.post('/artists', (req, res) => {
     mysqlCon.query('INSERT INTO artists SET ?', req.body, (error, results) => {
         error
         ? res.send(error.message)
