@@ -16,41 +16,22 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Album, {
         foreignKey: 'albumId'
       });
+      this.hasMany(models.Library, {
+        foreignKey: 'songId',
+        as: 'playlists'
+      })
     }
   };
   Song.init({
     title: DataTypes.STRING,
-    artistId: {
-      type: DataTypes.INTEGER,
-      field: "artist_id"
-    }, 
-    albumId: {
-      type: DataTypes.INTEGER,
-      field: "album_id"
-    },
+    artistId: DataTypes.INTEGER, 
+    albumId: DataTypes.INTEGER,
     length: DataTypes.INTEGER,
-    trackNumber: {
-      type: DataTypes.INTEGER,
-      field: "track_number"
-    },
+    trackNumber: DataTypes.INTEGER,
     lyrics: DataTypes.TEXT,
     youtube: DataTypes.STRING,
-    releasedAt: {
-      type: DataTypes.DATEONLY,
-      field: "realeased_at"
-    },
-    uploadedAt: {
-      type: DataTypes.DATEONLY,
-      field: "uploaded_at"
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      field: "created_at"
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: "updated_at"
-    }
+    releasedAt: DataTypes.DATEONLY,
+    uploadedAt: DataTypes.DATEONLY
   },
   {
     sequelize,

@@ -1,7 +1,6 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Songs');
     await queryInterface.createTable('Songs', {
       id: {
         allowNull: false,
@@ -12,29 +11,37 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      artist_id: {
+        type: Sequelize.INTEGER
+      },
+      album_id: {
+        type: Sequelize.INTEGER
+      },
       length: {
+        type: Sequelize.INTEGER
+      },
+      track_number: {
         type: Sequelize.INTEGER
       },
       lyrics: {
         type: Sequelize.TEXT
       },
-      releasedAt: {
-        type: Sequelize.DATEONLY,
-        field: "realeased_at"
+      youtube: {
+        type: Sequelize.STRING
       },
-      uploadedAt: {
-        type: Sequelize.DATEONLY,
-        field: "uploaded_at"
+      released_at: {
+        type: Sequelize.DATEONLY
       },
-      createdAt: {
+      uploaded_at: {
+        type: Sequelize.DATEONLY
+      },
+      created_at: {
         allowNull: false,
-        type: Sequelize.DATE,
-        field: "created_at"
+        type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
-        type: Sequelize.DATE,
-        field: "updated_at"
+        type: Sequelize.DATE
       }
     });
   },
