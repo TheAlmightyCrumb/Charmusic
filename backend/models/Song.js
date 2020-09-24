@@ -17,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'albumId'
       });
       this.hasMany(models.Library, {
-        foreignKey: 'songId',
-        as: 'playlists'
+        foreignKey: 'songId'
       })
     }
   };

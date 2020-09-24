@@ -8,7 +8,7 @@ module.exports = {
     "dialect": "mysql",
     "define": {
       'underscored': true
-    }
+    },
   },
   "test": {
     "username": process.env.DB_USER,

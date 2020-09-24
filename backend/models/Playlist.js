@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Library, {
-        foreignKey: 'playlistId',
-        as: 'songs'
+        foreignKey: 'playlistId'
       })
     }
   };
