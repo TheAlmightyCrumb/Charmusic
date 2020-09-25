@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Artist, {
-        foreignKey: 'artistId'
+        foreignKey: 'artistId',
+        onDelete: 'cascade'
       });
       this.hasMany(models.Song, {
         foreignKey: 'albumId',

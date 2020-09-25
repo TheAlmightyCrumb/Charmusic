@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Artist, {
-        foreignKey: 'artistId'
+        foreignKey: 'artistId',
+        onDelete: 'cascade'
       });
       this.belongsTo(models.Album, {
-        foreignKey: 'albumId'
+        foreignKey: 'albumId',
+        onDelete:'cascade'
       });
       this.hasMany(models.Library, {
         foreignKey: 'songId'
@@ -35,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     sequelize,
     modelName: 'Song',
+    paranoid: true
   });
   return Song;
 };
