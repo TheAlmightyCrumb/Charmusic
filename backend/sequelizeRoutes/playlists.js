@@ -49,8 +49,8 @@ router.route('/:id')
                 }
             ],
             raw: true
-        })
-        return res.status(200).json({ specPlaylist, songs: songsInPlaylist });
+        });
+        return res.status(200).json({ playlist: specPlaylist, songs: songsInPlaylist });
     }
     catch(err) {
         return res.status(500).json({ error: err.message });

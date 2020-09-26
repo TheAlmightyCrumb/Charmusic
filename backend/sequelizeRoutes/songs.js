@@ -126,7 +126,7 @@ router.route('/:id')
             ],
             raw: true,
           });
-          return res.status(200).json({ specSong });
+          return res.status(200).json(specSong);
         }
     }
     catch(err) {

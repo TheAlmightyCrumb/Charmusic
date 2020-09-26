@@ -26,7 +26,9 @@ router.route('/:id')
 .get(async (req, res) => {
     try {
         const specArtist = await Artist.findByPk(req.params.id);
-        return res.status(200).json({ specArtist });
+        const albumsOfArtist = await specArtist.getAlbums();
+        const songsOfArtist = await specArtist.getSongs();
+        return res.status(200).json({ artist: specArtist, albums: albumsOfArtist, songs: songsOfArtist });
     }
     catch(err) {
         return res.status(500).json({ error: err.message });

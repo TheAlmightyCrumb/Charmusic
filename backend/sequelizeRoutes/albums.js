@@ -27,8 +27,17 @@ router.route('/:id')
 /* Get an album by id */
 .get(async (req, res) => {
     try {
-        const specAlbum = await Album.findByPk(req.params.id, { include: [{model: Artist , attributes: ['artistName']}], raw: true });
-        return res.status(200).json({ specAlbum });
+        const specAlbum = await Album.findByPk(req.params.id,
+            { 
+                include: [
+                    {
+                        model: Artist,
+                        attributes: ['artistName']
+                    }
+                ]
+            });
+        const songsOfAlbum = await specAlbum.getSongs();
+        return res.status(200).json({ album: specAlbum, songs: songsOfAlbum });
     }
     catch(err) {
         return res.status(500).json({ error: err.message });
