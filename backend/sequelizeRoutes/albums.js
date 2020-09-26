@@ -43,7 +43,7 @@ router.route('/:id')
             const updatedAlbum = await Album.findByPk(req.params.id);
             return res.status(200).json({ updatedAlbum });
         }
-        throw new Error('No such artist');
+        throw new Error('No such album');
     }
     catch(err) {
         return res.status(500).send(err.message);
@@ -57,7 +57,7 @@ router.route('/:id')
         if (deleted) {
             return res.status(204).send('Deleted Successfully');
         }
-        throw new Error('No such artist')
+        throw new Error('No such album')
     }
     catch(err) {
         return res.status(500).send(err.message);

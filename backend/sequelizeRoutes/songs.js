@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Song, Album, Artist, Library} = require('../models');
+const { Song, Album, Artist, Library } = require('../models');
 const { Op } = require('sequelize');
 
 let router = Router();
