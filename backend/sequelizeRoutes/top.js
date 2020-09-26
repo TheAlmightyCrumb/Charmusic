@@ -13,7 +13,7 @@ router
 /* Get top 20 albums */
 .get("/albums", async (req, res) => {
     const topAlbums = await Album.findAll({ limit: 20});
-    return res.json(topSongs);
+    return res.json(topAlbums);
 })
 
 /* Get top 20 artists */
