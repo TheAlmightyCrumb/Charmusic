@@ -20,8 +20,7 @@ router.route('/')
                 attributes: ['albumName'],
                 required: true
             }
-        ],
-        raw: true
+        ]
     });
     return res.json(allSongs);
 })
@@ -63,8 +62,7 @@ router.route('/:id')
                         attributes: ["albumName"],
                         required: true,
                     }
-                ],
-                raw: true
+                ]
             })
             return res.status(200).send(songsInPlaylist);
         } else if (Object.keys(req.query)[0] == "artist") {
@@ -84,8 +82,7 @@ router.route('/:id')
                         attributes: ["albumName"],
                         required: true,
                     }
-                ],
-                raw: true
+                ]
             });
             return res.status(200).json(songsOfArtist);
         } else if (Object.keys(req.query)[0] == "album") {
@@ -105,8 +102,7 @@ router.route('/:id')
                         attributes: ["albumName"],
                         required: true,
                     }
-                ],
-                raw: true
+                ]
             });
             return res.status(200).json(songsOfAlbum);
         }
@@ -123,8 +119,7 @@ router.route('/:id')
                 attributes: ["albumName"],
                 required: true,
               },
-            ],
-            raw: true,
+            ]
           });
           return res.status(200).json(specSong);
         }

@@ -15,4 +15,4 @@ app.use('/songs', songs);
 app.use('/playlists', playlists);
 app.use('/top', top);
 
-app.listen(3001);
+module.exports = app;

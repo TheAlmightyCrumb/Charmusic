@@ -47,8 +47,7 @@ router.route('/:id')
                     attributes: ["albumName"],
                     required: true,
                 }
-            ],
-            raw: true
+            ]
         });
         return res.status(200).json({ playlist: specPlaylist, songs: songsInPlaylist });
     }
