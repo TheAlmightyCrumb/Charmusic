@@ -7,7 +7,7 @@ router.route('/')
 
 /* Get all albums */
 .get(async (req, res) => {
-    const allAlbums = await Album.findAll({ include: [{model: Artist , attributes: ['artistName']}], raw: true});
+    const allAlbums = await Album.findAll({ include: [{model: Artist , attributes: ['artistName', 'coverImg']}]});
     return res.json(allAlbums);
 })
 
@@ -32,7 +32,7 @@ router.route('/:id')
                 include: [
                     {
                         model: Artist,
-                        attributes: ['artistName']
+                        attributes: ['artistName', 'coverImg']
                     }
                 ]
             });

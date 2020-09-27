@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import LibraryMusicSharpIcon from '@material-ui/icons/LibraryMusicSharp';
 import './ArtistPage.css';
+import lengthToTime from '../functions/lengthToTime';
 
 export default function ArtistPage({match}) {
 
@@ -13,50 +14,40 @@ export default function ArtistPage({match}) {
 
     const showArtistInfo = async () => {
         const { data } = await axios.get(`/artists/${match.params.id}`);
-        setArtistName(data[0].Artist_Name);
-        setArtistImage(data[0].Cover_img);
-    }
-
-    const showAlbums = async () => {
-        const { data } = await axios.get('/albums');
-        const albumsArr = data.filter(album => album.Artist_id == match.params.id)
-            .map(item => {
-                return (
-                    <div key={item.Album_id}>
-                        <Link to={`/albums/${item.Album_id}`} className='artistPageLink'>
-                            <div className='albumImagePageContainer'>
-                                <img src={item.Cover_img} alt={item.Album_Name} className='albumPageImage' />
-                            </div>
-                            <div className='albumPageName'>{item.Album_Name}</div>
-                        </Link>
-                    </div>
-                )
-            });
+        // console.log('data: ', data);
+        setArtistName(data.artist.artistName);
+        setArtistImage(data.artist.coverImg);
+        const albumsArr = data.albums.map(album => {
+            return (
+                <div key={album.id}>
+                    <Link to={`/albums/${album.id}`} className='artistPageLink'>
+                        <div className='albumImagePageContainer'>
+                            <img src={album.coverImg} alt={album.albumName} className='albumPageImage' />
+                        </div>
+                        <div className='albumPageName'>{album.albumName}</div>
+                    </Link>
+                </div>
+            )
+        });
         setArtistAlbums(albumsArr);
-    }
-
-    const showSongs = async () => {
-        const { data } = await axios.get('/songs');
-        const songsArr = data.filter(song => song.Artist_id == match.params.id)
-            .map(item => {
-                return (
-                    <div key={item.Song_id}>
-                        <Link to={`/songs/${item.Song_id}?artist=${item.Artist_id}`} className='artistPageLink'>
-                            <div className='songTitleContainer'>
-                                <span className='artistSongTitle'><LibraryMusicSharpIcon /><span style={{marginLeft: "5px"}}>{item.Title}</span></span>
-                                <span style={{fontSize: "0.8em"}}>{item.Length.substring(3)}</span>
-                            </div>
-                        </Link>
-                    </div>  
-                )
-          });
+        const songsArr = data.songs.map(song => {
+            return (
+                <div key={song.id}>
+                    <Link to={`/songs/${song.id}?artist=${song.artistId}`} className='artistPageLink'>
+                        <div className='songTitleContainer'>
+                            <span className='artistSongTitle'><LibraryMusicSharpIcon /><span style={{marginLeft: "5px"}}>{song.title}</span></span>
+                            {/* <span style={{fontSize: "0.8em"}}>{song.Length.substring(3)}</span> */}
+                            <span style={{fontSize: "0.8em"}}>{lengthToTime(song.length)}</span>
+                        </div>
+                    </Link>
+                </div>  
+            )
+        });
         setArtistSongs(songsArr);
     }
 
     useEffect(() => {
         showArtistInfo();
-        showAlbums();
-        showSongs();
     }, []);
 
     return (

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import LibraryMusicSharpIcon from '@material-ui/icons/LibraryMusicSharp';
 import './Songs.css';
+import lengthToTime from '../functions/lengthToTime';
 
 export default function Songs() {
 
@@ -13,14 +14,15 @@ export default function Songs() {
         const songsArr = data;
         setSongs(songsArr.map(song => {
             return (
-            <div key={song.Song_id}>
-                <Link to={`/songs/${song.Song_id}`} className='songLink'>
+            <div key={song.id}>
+                <Link to={`/songs/${song.id}`} className='songLink'>
                     <div className='song-title-container'>
                         <span className='song-title'>
                             <LibraryMusicSharpIcon />
-                            <span style={{marginLeft: "5px"}}>{song.Title}</span>
+                            <span style={{marginLeft: "5px"}}>{song.title}</span>
                         </span>
-                        <span style={{fontSize: "0.8em"}}>{song.Length.substring(3)}</span>
+                        {/* <span style={{fontSize: "0.8em"}}>{song.Length.substring(3)}</span> */}
+                        <span style={{fontSize: "0.8em"}}>{lengthToTime(song.length)}</span>
                     </div>
                 </Link>
             </div>
