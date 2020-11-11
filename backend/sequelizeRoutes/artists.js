@@ -3,8 +3,8 @@ const { Artist } = require('../models');
 
 let router = Router();
 
-router.route('/'
-/* Get all artists */)
+router.route('/')
+/* Get all artists */
 .get(async (req, res) => {
     const allArtists = await Artist.findAll();
     return res.json(allArtists);
