@@ -5,6 +5,7 @@ const albums = require('./sequelizeRoutes/albums');
 const songs = require('./sequelizeRoutes/songs');
 const playlists = require('./sequelizeRoutes/playlists');
 const top = require('./sequelizeRoutes/top');
+const search = require('./search');
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use('/albums', albums);
 app.use('/songs', songs);
 app.use('/playlists', playlists);
 app.use('/top', top);
+app.use('/search', search);
 
 module.exports = app;

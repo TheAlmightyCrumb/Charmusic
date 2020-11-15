@@ -1,6 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 const { Client } = require("@elastic/elasticsearch");
-const { Song, Album, Artist, Playlist, Library } = require('./models');
+const { Song, Album, Artist, Playlist, Library } = require("./models");
 
 const client = new Client({
   cloud: {
@@ -27,9 +27,36 @@ const client = new Client({
 //   }
 // ]
 
-
-
 const run = async () => {
+  // client.msearch({
+  //   body: [
+  //     { index: "songs" },
+  //     { query: { match: { artist: { query: "Aerosmith", fuzziness: "auto" } } } },
+
+  //     { index: "artists" },
+  //     { query: { match: { name: { query: "Imagine", fuzziness: "auto" } } } }
+  //   ]
+  // })
+  // .then(res => res.body.responses.forEach(res => console.log(res.hits.hits)))
+  // .catch(e => console.log("Your Error: ", e));
+
+  client
+    .search({
+      index: "songs",
+      body: {
+        query: {
+          query_string: {
+            query: "/.*idi.*/gim",
+            fields: ["title", "artist"],
+            fuzziness: "auto",
+          },
+        },
+      },
+      sort: ["_score"],
+      size: 6,
+    })
+    .then((res) => console.log(res.body.hits.hits));
+
   // await client.index({
   //   index: "breaking-bad",
   //   id: 1,
@@ -125,35 +152,35 @@ const run = async () => {
   //   })
   // });
 
-  const allPlaylists = await Playlist.findAll();
-  allPlaylists.forEach(async playlist => {
-    const songsInPlaylist = await Song.findAll({
-      include: [
-        {
-          model: Library,
-          attributes: [],
-          where: {
-            playlistId: playlist.id
-          }
-        }
-      ]
-    });
-    await client.index({
-      index: "playlists",
-      id: playlist.id,
-      body: {
-        name: playlist.playlistName,
-        image: playlist.coverImg,
-        songs: songsInPlaylist.length
-      }
-    })
-  });
+  // const allPlaylists = await Playlist.findAll();
+  // allPlaylists.forEach(async playlist => {
+  //   const songsInPlaylist = await Song.findAll({
+  //     include: [
+  //       {
+  //         model: Library,
+  //         attributes: [],
+  //         where: {
+  //           playlistId: playlist.id
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   await client.index({
+  //     index: "playlists",
+  //     id: playlist.id,
+  //     body: {
+  //       name: playlist.playlistName,
+  //       image: playlist.coverImg,
+  //       songs: songsInPlaylist.length
+  //     }
+  //   })
+  // });
 
   // await client.indices.refresh({ index: "breaking-bad" });
   // await client.indices.refresh({ index: "songs" });
   // await client.indices.refresh({ index: "albums" });
   // await client.indices.refresh({ index: "artists" });
-  await client.indices.refresh({ index: "playlists" });
+  // await client.indices.refresh({ index: "playlists" });
 
   // const { body } = await client.search({
   //   index: "breaking-bad",
@@ -167,4 +194,4 @@ const run = async () => {
   // console.log(body.hits.hits);
 };
 
-run().catch(e => console.log(e));
+run().catch((e) => console.log(e));
