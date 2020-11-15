@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 
 export default function Search() {
   const [searchValues, setSearchValues] = useState({});
+  const [showSongsNumber, setShowSongsNumber] = useState(3);
+  const [showAlbumsNumber, setShowAlbumsNumber] = useState(3);
+  const [showArtistsNumber, setShowArtistsNumber] = useState(3);
+  const [showPlaylistsNumber, setShowPlaylistsNumber] = useState(3);
 
   const getSearchOptions = async (word) => {
     const { data } = await axios.get(`/search?word=${word}`);
@@ -43,11 +47,14 @@ export default function Search() {
         }}
       >
         <div className="resultContainer">
-          <h2 className="resultHeader">Songs</h2>
+          {searchValues.songs && <h2 className="resultHeader">Songs</h2>}
           {searchValues.songs &&
-            searchValues.songs.slice(0, 3).map((song) => {
+            searchValues.songs.slice(0, showSongsNumber).map((song) => {
               return (
-                <Link style={{ color: "#BFCEDD", textDecoration: "none" }} to={`/songs/${song["_id"]}`}>
+                <Link
+                  style={{ color: "#BFCEDD", textDecoration: "none" }}
+                  to={`/songs/${song["_id"]}`}
+                >
                   <div
                     key={`song${song["_id"]}`}
                     className="foundResultsContainer"
@@ -77,13 +84,39 @@ export default function Search() {
                 </Link>
               );
             })}
+          {searchValues.songs &&
+          searchValues.songs.length > 3 &&
+          showSongsNumber === 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowSongsNumber(searchValues.songs.length);
+              }}
+            >
+              Show All...
+            </sub>
+          ) : searchValues.songs &&
+            searchValues.songs.length > 3 &&
+            showSongsNumber > 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowSongsNumber(3);
+              }}
+            >
+              Show Less...
+            </sub>
+          ) : null}
         </div>
         <div className="resultContainer">
           <h2 className="resultHeader">Albums</h2>
           {searchValues.albums &&
-            searchValues.albums.slice(0, 3).map((album) => {
+            searchValues.albums.slice(0, showAlbumsNumber).map((album) => {
               return (
-                <Link style={{ color: "#BFCEDD", textDecoration: "none" }} to={`/albums/${album["_id"]}`}>
+                <Link
+                  style={{ color: "#BFCEDD", textDecoration: "none" }}
+                  to={`/albums/${album["_id"]}`}
+                >
                   <div
                     key={`album${album["_id"]}`}
                     className="foundResultsContainer"
@@ -113,13 +146,39 @@ export default function Search() {
                 </Link>
               );
             })}
+            {searchValues.albums &&
+          searchValues.albums.length > 3 &&
+          showAlbumsNumber === 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowAlbumsNumber(searchValues.albums.length);
+              }}
+            >
+              Show All...
+            </sub>
+          ) : searchValues.albums &&
+            searchValues.albums.length > 3 &&
+            showAlbumsNumber > 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowAlbumsNumber(3);
+              }}
+            >
+              Show Less...
+            </sub>
+          ) : null}
         </div>
         <div className="resultContainer">
           <h2 className="resultHeader">Artists</h2>
           {searchValues.artists &&
-            searchValues.artists.slice(0, 3).map((artist) => {
+            searchValues.artists.slice(0, showArtistsNumber).map((artist) => {
               return (
-                <Link style={{ color: "#BFCEDD", textDecoration: "none" }} to={`/artists/${artist["_id"]}`}>
+                <Link
+                  style={{ color: "#BFCEDD", textDecoration: "none" }}
+                  to={`/artists/${artist["_id"]}`}
+                >
                   <div
                     key={`artist${artist["_id"]}`}
                     className="foundResultsContainer"
@@ -140,13 +199,39 @@ export default function Search() {
                 </Link>
               );
             })}
+            {searchValues.artists &&
+          searchValues.artists.length > 3 &&
+          showArtistsNumber === 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowArtistsNumber(searchValues.artists.length);
+              }}
+            >
+              Show All...
+            </sub>
+          ) : searchValues.artists &&
+            searchValues.artists.length > 3 &&
+            showArtistsNumber > 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowArtistsNumber(3);
+              }}
+            >
+              Show Less...
+            </sub>
+          ) : null}
         </div>
         <div className="resultHeader">
           <h2 className="resultHeader">Playlists</h2>
           {searchValues.playlists &&
-            searchValues.playlists.slice(0, 3).map((playlist) => {
+            searchValues.playlists.slice(0, showPlaylistsNumber).map((playlist) => {
               return (
-                <Link style={{ color: "#BFCEDD", textDecoration: "none" }} to={`/playlists/${playlist["_id"]}`}>
+                <Link
+                  style={{ color: "#BFCEDD", textDecoration: "none" }}
+                  to={`/playlists/${playlist["_id"]}`}
+                >
                   <div
                     key={`playlist${playlist["_id"]}`}
                     className="foundResultsContainer"
@@ -173,6 +258,29 @@ export default function Search() {
                 </Link>
               );
             })}
+            {searchValues.playlists &&
+          searchValues.playlists.length > 3 &&
+          showPlaylistsNumber === 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowPlaylistsNumber(searchValues.playlists.length);
+              }}
+            >
+              Show All...
+            </sub>
+          ) : searchValues.playlists &&
+            searchValues.playlists.length > 3 &&
+            showPlaylistsNumber > 3 ? (
+            <sub
+              className="showAll"
+              onClick={() => {
+                setShowPlaylistsNumber(3);
+              }}
+            >
+              Show Less...
+            </sub>
+          ) : null}
         </div>
       </div>
     </>

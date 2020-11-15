@@ -41,3 +41,18 @@
   font-size: 12px;
   margin: auto;
 }
+
+.showAll {
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 300;
+}
+
+.showAll:hover {
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+    transform: scaleX(10px);
+    cursor: pointer;
+}
